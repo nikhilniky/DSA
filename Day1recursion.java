@@ -1,7 +1,7 @@
 
-https://www.codingninjas.com/codestudio/problems/factorial-of-a-number_1115779
+/*https://www.codingninjas.com/codestudio/problems/factorial-of-a-number_1115779
 
-Code: in java
+Code: in java*/
 import java.util.*;
 
 class Solution {
