@@ -40,3 +40,17 @@ class Solution {
 	    }
 	}
 }
+
+
+//With improved  //we broke it by 2 and multiple which will decrease the height of the tree 
+
+class Solution {
+	public static long Pow(int X, int N) {
+		if(X==0||N==0)
+			return 1;
+		long partial=Pow(X,N/2);
+		 if(N%2==1)
+			return partial*partial*X;
+		   return partial*partial;
+	}
+}
