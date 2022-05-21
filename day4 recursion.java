@@ -3,6 +3,7 @@
 //palindrome using recursion
 //two pointer approach 
 // we will start comparing first and last letter of the string
+//it will be O(n/2) time complexity
 
 
 
