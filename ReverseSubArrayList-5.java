@@ -18,3 +18,24 @@ public class Solution
 
 
 //Recursion 
+import java.util.*;
+
+public class Solution 
+{
+	public void reverse(int l , int r,ArrayList<Integer> array)
+	{
+		if(l>=r) {
+			return ;
+		}
+		Collections.swap(array,l,r);
+		reverse(l+1,r-1,array);
+	}
+    public static void reverseArray(ArrayList<Integer> arr, int m)
+    {
+        // Write your code here.
+		Solution rev = new Solution(); 
+		rev.reverse(m+1,arr.size()-1,arr);
+	 
+    }
+
+}
