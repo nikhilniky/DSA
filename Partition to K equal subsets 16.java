@@ -25,3 +25,101 @@ but i should start from 0 and bucketSum should also start from 0. However, if bu
 Time Complexity: O(2^N*K) { This is because we are filling all the buckets one by one and everytime one bucket is filled we start again from 0th index}
 
 Space Complexity: O(K*N) { We will keep on exploring all the possibilities until k buckets are not filled completely)*/
+
+
+
+
+//own try with help of youtube video
+import java.util.*;
+
+public class Solution {
+    
+    public static boolean help(int i, int bucketNum,int bucketSum,
+                               int[] nums,int reqSum,int K,ArrayList<Integer> alreadyPicked){
+       if(bucketNum==K+1) return true;
+       if(bucketSum== reqSum){
+            help(0,bucketNum+1,0,nums,reqSum,K,alreadyPicked);
+       }
+        if(i>nums.length) return false;
+        if(bucketSum>reqSum) return false;
+       if(alreadyPicked.contains(nums[i]))
+        {
+            return help(i+1,bucketNum,bucketSum,nums,reqSum,K,alreadyPicked);
+        }
+       else{
+           //pick
+           alreadyPicked.add(nums[i]);
+           bucketSum+=nums[i];
+           boolean op1= help(i+1,bucketNum,bucketSum,nums,reqSum,K,alreadyPicked);
+           //ignore
+           alreadyPicked.remove(alreadyPicked.size());
+           bucketSum-=nums[i];
+           boolean op2= help(i+1,bucketNum,bucketSum,nums,reqSum,K,alreadyPicked);
+           return op1 | op2;
+       }
+       // return false;
+    }
+	public static boolean canPartitionKSubsets(int[] nums, int n, int K) {
+		// Write your code here.
+          List numbers = Arrays.asList(nums);
+        int size=numbers.size();
+        int sum =0;
+        for(int j=0;j<size;j++){
+            sum+=nums[j];
+        }
+        int reqSum=sum/K;
+        if(sum%K !=0) return false;
+        ArrayList<Integer> alreadyPicked= new ArrayList<Integer>();
+        boolean result= help(0,1,0,nums,reqSum,K,alreadyPicked);
+        return result;
+	}
+}
+
+
+
+///success answwer
+public class Solution {
+
+    private static boolean canPartitionKSubsetsHelper(int[] nums, int K, boolean[] vis, int targetSubsetSum,
+            int curSubsetSum, int checkIdx) {
+
+        if (K == 0) {
+            return true;
+        }
+
+        if (curSubsetSum == targetSubsetSum) {
+            return canPartitionKSubsetsHelper(nums, K - 1, vis, targetSubsetSum, 0, 0);
+        }
+
+        for (int i = checkIdx; i < nums.length; i++) {
+            if (vis[i] == false && curSubsetSum + nums[i] <= targetSubsetSum) {
+                vis[i] = true;
+                if (canPartitionKSubsetsHelper(nums, K, vis, targetSubsetSum, curSubsetSum + nums[i], i + 1)) {
+                    return true;
+                }
+
+                vis[i] = false;
+            }
+
+        }
+
+        return false;
+    }
+
+    public static boolean canPartitionKSubsets(int[] nums, int n, int K) {
+        int sum = 0;
+        int maxNum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            maxNum = Math.max(maxNum, nums[i]);
+        }
+
+        if (sum % K != 0 || maxNum > sum / K) {
+            return false;
+        }
+
+        boolean[] vis = new boolean[n];
+        return canPartitionKSubsetsHelper(nums, K, vis, sum / K, 0, 0);
+    }
+
+}
