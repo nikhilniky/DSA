@@ -1,1 +1,12 @@
 Euclid GCD, Prime Numbers & Sieve of Eratosthenes |
+
+
+Arrays.fill
+
+mat=rk the arrays true then make them false one by one if they are not prime
+
+N numbers of prime or not then only chech  √N
+and check it is divisible by 2
+return true false to array then print array
+
+
